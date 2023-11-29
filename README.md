@@ -14,7 +14,7 @@ El contenido de este **repositorio** es el **backend** del **E-commerce** de la 
 * Luz Candy Becerril Palacios
 * Zurisadai Santos Padilla
 
-![Image](https://drive.google.com/file/d/1ksZTMC5cwfzN5fL1Zj08i9sGGNSAEAYi/view?usp=sharing)
+![Image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7_BbQRCNA97JWdfqywe45GgoaulRXxT2RZg&usqp=CAU)
 
 ## License
 ---
