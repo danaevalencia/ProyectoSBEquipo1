@@ -39,16 +39,16 @@ public class VentasService {
 		ventasRepository.save(ventas);
 				return ventas;
 		
-//			Optional<Ventas>tmpVenta=ventasRepository.findById(ventas.getId());
+//			Optional<Ventas>tmpVenta=ventasRepository.findByFolio(ventas.getFolio());
 //			if(tmpVenta.isEmpty()) {
 //				return ventasRepository.save(ventas);
 //			}else {
-//				System.out.println("Ya existe el producto con el Id ["+ventas.getId()+"]");
+//				System.out.println("Ya existe el producto con el Id ["+ventas.getFolio()+"]");
 //				return null;
 //			}
 		}
 	
-	public Ventas updateVentas(long id, Double preciototal, String fechacompra, Double cantidad, String status, String metodopago) {
+	public Ventas updateVentas(long id, Double preciototal, String fechacompra, Double cantidad, String status, String metodopago, String folio) {
 		Ventas venta=null;
 			if(ventasRepository.existsById(id)) {
 				venta=ventasRepository.findById(id).get();
@@ -57,10 +57,10 @@ public class VentasService {
 				if(cantidad!=null)venta.setCantidad(cantidad);
 				if(status!=null)venta.setStatus(status);
 				if(metodopago!=null)venta.setMetodopago(metodopago);
+				if(folio!=null)venta.setFolio(folio);
 				ventasRepository.save(venta);
 			}//if
 		return venta;
 	}
 	
 }//classVentasService
-

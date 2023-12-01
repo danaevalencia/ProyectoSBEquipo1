@@ -55,9 +55,10 @@ import org.springframework.web.bind.annotation.RestController;
 				@RequestParam(required=false) String fechacompra,
 				@RequestParam(required=false) Double cantidad,
 				@RequestParam(required=false) String status,
-				@RequestParam(required=false) String metodopago
+				@RequestParam(required=false) String metodopago,
+				@RequestParam(required=false) String folio
 				){
-			return ventasService.updateVentas(id, preciototal, fechacompra, cantidad, status, metodopago);		
+			return ventasService.updateVentas(id, preciototal, fechacompra, cantidad, status, metodopago, folio);		
 		}//putVentas
 		
 
