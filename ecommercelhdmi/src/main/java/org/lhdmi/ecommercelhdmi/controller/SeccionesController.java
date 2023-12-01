@@ -1,6 +1,6 @@
 package org.lhdmi.ecommercelhdmi.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.lhdmi.ecommercelhdmi.model.Secciones;
 import org.lhdmi.ecommercelhdmi.service.SeccionesService;
@@ -27,7 +27,7 @@ public class SeccionesController {
 				this.seccionesService =seccionesService;
 			}//constructor
 		@GetMapping    //http://localhost:8080/api/secciones/
-		    public ArrayList<Secciones> getAllSecciones(){
+		    public List<Secciones> getAllSecciones(){
 		    	return seccionesService.getAllSecciones();
 		    }//get all secciones
 		

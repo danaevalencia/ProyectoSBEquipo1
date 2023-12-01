@@ -1,75 +1,66 @@
 package org.lhdmi.ecommercelhdmi.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.lhdmi.ecommercelhdmi.model.Ventas;
+import org.lhdmi.ecommercelhdmi.repository.VentasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-	@Service
-	public class VentasService {
-		public final ArrayList<Ventas> lista = new ArrayList<Ventas>();
-		@Autowired
-		public VentasService() {
-			lista.add(new Ventas(2000.00, "2023-11-20", 1.0, "proceso de envío", "tarjeta de crédito"));
-			lista.add(new Ventas(7000.00, "2023-10-18", 3.0, "enviado", "paypal"));
-			lista.add(new Ventas(5000.00, "2023-01-26", 2.0, "devuelto", "oxxo"));
-			lista.add(new Ventas(3000.00, "2023-11-02", 1.0, "enviado", "tarjeta débito"));
-			lista.add(new Ventas(6000.00, "2023-05-03", 2.0, "entregado", "tarjeta de crédito"));  
-			lista.add(new Ventas(2500.00, "2023-07-20", 1.0, "enviado", "débito"));
-			lista.add(new Ventas(4000.00, "2023-11-08", 2.0, "procesodeenvio", "paypal"));
-			lista.add(new Ventas(1000.00, "2023-02-14", 1.0, "enviado", "tarjeta de crédito")); 
-			lista.add(new Ventas(1500.00, "2023-09-12", 2.0, "enviado", "oxxo"));
-			lista.add(new Ventas(7000.00, "2023-09-07", 1.0, "entregado", "tarjeta de crédito"));
-		}//constructor
-		
-		public ArrayList<Ventas> getAllVentas(){
-			return lista;
-		}//getAllVentas
+@Service
+public class VentasService {
+	private final VentasRepository ventasRepository;
+	
+	@Autowired
+	public VentasService(VentasRepository ventasRepository) {
+		this.ventasRepository=ventasRepository;
+	}
+	
+	public List<Ventas> getAllVentas(){
+		return ventasRepository.findAll();
+	}//getAllVentas
 
-		public Ventas getVentas(long id) {
-				Ventas venta=null;
-				for (Ventas ventas : lista) {
-					if(id==ventas.getId()) {
-						venta=ventas;
-						break;
-					}
-				}//forEach
-				return venta;
-			}//getProducto
+	public Ventas getVentas(long id) {
+		return ventasRepository.findById(id).orElseThrow(
+				()->new IllegalArgumentException("La venta con el id ["+id+"] no existe"));
+		}//getProducto
 
-		public Ventas deleteVentas(long id) {
-				Ventas venta=null;
-				for (Ventas ventas : lista) {
-					if(id==ventas.getId()) {
-						venta=ventas;
-						lista.remove(ventas);
-						break;
-					}
-				}//foEach
-				return venta;
-		}
-
-		public Ventas addVentas(Ventas ventas) {
-				lista.add(ventas);
-				return ventas;
-			}
-		
-		public Ventas updateVentas(long id, Double preciototal, String fechacompra, Double cantidad, String status, String metodopago) {
+	public Ventas deleteVentas(long id) {
 			Ventas venta=null;
-			for (Ventas ventas : lista) {
-				if(id==ventas.getId()) {
-					if(preciototal!=null)ventas.setPreciototal(preciototal);
-					if(fechacompra!=null)ventas.setFechacompra(fechacompra);
-					if(cantidad!=null)ventas.setCantidad(cantidad);
-					if(status!=null)ventas.setStatus(status);
-					if(metodopago!=null)ventas.setMetodopago(metodopago);
-					venta=ventas;
-					break;
-				}//if
-			}//forEach
+			if(ventasRepository.existsById(id)) {
+				venta=ventasRepository.findById(id).get();
+				ventasRepository.deleteById(id);
+			}//is existsById
 			return venta;
-		}
+	}
+
+	public Ventas addVentas(Ventas ventas) {
+		ventasRepository.save(ventas);
+				return ventas;
 		
-	}//classVentasService
+//			Optional<Ventas>tmpVenta=ventasRepository.findById(ventas.getId());
+//			if(tmpVenta.isEmpty()) {
+//				return ventasRepository.save(ventas);
+//			}else {
+//				System.out.println("Ya existe el producto con el Id ["+ventas.getId()+"]");
+//				return null;
+//			}
+		}
+	
+	public Ventas updateVentas(long id, Double preciototal, String fechacompra, Double cantidad, String status, String metodopago) {
+		Ventas venta=null;
+			if(ventasRepository.existsById(id)) {
+				venta=ventasRepository.findById(id).get();
+				if(preciototal!=null)venta.setPreciototal(preciototal);
+				if(fechacompra!=null)venta.setFechacompra(fechacompra);
+				if(cantidad!=null)venta.setCantidad(cantidad);
+				if(status!=null)venta.setStatus(status);
+				if(metodopago!=null)venta.setMetodopago(metodopago);
+				ventasRepository.save(venta);
+			}//if
+		return venta;
+	}
+	
+}//classVentasService
 

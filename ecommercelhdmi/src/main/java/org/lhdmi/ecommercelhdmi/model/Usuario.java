@@ -1,16 +1,35 @@
 package org.lhdmi.ecommercelhdmi.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="usuarios")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique = true, nullable=false)
 	private Long id;
+	@Column(nullable=false)
 	private String nombre;
+	@Column(nullable=false)
 	private String correo;
+	@Column(nullable=false)
 	private String contrasena;
+	@Column(nullable=false)
 	private String registrof;
+	@Column(nullable=false)
 	private String tipo;
+	@Column(nullable=false)
 	private String foto;
+	@Column(nullable=false)
 	private String direccion;
 	
-	private static long total = 0;
+
 	
 	//1 Constructor sin id
 	public Usuario(String nombre, String correo, String contrasena, String registrof, String tipo, String foto,
@@ -22,14 +41,12 @@ public class Usuario {
 		this.tipo = tipo;
 		this.foto = foto;
 		this.direccion = direccion;
-		Usuario.total++;
-		this.id=total;
+		
 	}//Constructor
 	
 	//2 Encapsular
 	public Usuario() {
-		Usuario.total++;
-		this.id=total;
+	
 	}//ConstructorVacio
 
 	public String getNombre() {

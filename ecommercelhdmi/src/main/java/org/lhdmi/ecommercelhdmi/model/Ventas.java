@@ -1,14 +1,31 @@
 package org.lhdmi.ecommercelhdmi.model;
+//POJO Plain Old Java Object
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ventas")//el nombre de la tabla es ventas
 public class Ventas {
-		private Long id;
-		private Double preciototal;
-		private String fechacompra;
-		private Double cantidad;
-		private String status;
-		private String metodopago;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
+	private Long id;
+	@Column(nullable=false)
+	private Double preciototal;
+	@Column(nullable=false)
+	private String fechacompra;
+	@Column(nullable=false)
+	private Double cantidad;
+	@Column(nullable=false)
+	private String status;
+	@Column(nullable=false)
+	private String metodopago;
 		
-		private static long total = 0;
 		
 		public Ventas(Double preciototal, String fechacompra, Double cantidad, String status, String metodopago) {
 			this.preciototal = preciototal;
@@ -16,14 +33,7 @@ public class Ventas {
 			this.cantidad = cantidad;
 			this.status = status;
 			this.metodopago = metodopago;
-			Ventas.total++;
-			this.id = total;
 		}//constructor
-		
-		public Ventas() {
-			Ventas.total++;
-			this.id = total;
-		}
 
 		public Double getPreciototal() {
 			return preciototal;

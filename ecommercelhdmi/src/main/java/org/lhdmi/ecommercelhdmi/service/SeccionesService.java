@@ -1,72 +1,69 @@
 package org.lhdmi.ecommercelhdmi.service;
 
-import java.util.ArrayList;
-
+import java.util.List;
+//import java.util.Optional;
 import org.lhdmi.ecommercelhdmi.model.Secciones;
+import org.lhdmi.ecommercelhdmi.repository.SeccionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SeccionesService {
-	public final ArrayList<Secciones> lista  = new ArrayList<Secciones>();
-	@Autowired
-	public SeccionesService() {
-		lista.add(new Secciones("Temporada","lote de obras únicas de temporada que serán expuestas por 3 meses.", (byte) 10));
-		
-		lista.add(new Secciones("Descontinuadas","obras ya no disponibles para su elaboración", (byte) 2));
+	 private final SeccionesRepository seccionesRepository;
+	 @Autowired
+		public SeccionesService(SeccionesRepository seccionesRepository) {
+			this.seccionesRepository = seccionesRepository;
+		}//constructor 
 
-		lista.add(new Secciones("Próximamente","Obras en proceso para su venta", (byte) 3));
-
-		lista.add(new Secciones("Stock","lote de obras aún disponibles después de temporada.", (byte) 10));
-
-		lista.add(new Secciones("Personalizables","Obras de referencia para personalización de acuerdo al cliente", (byte) 10));
-
-	}//SeccionesService
-	public ArrayList<Secciones> getAllSecciones() {
-		return lista;
+	public List<Secciones> getAllSecciones() {
+		return seccionesRepository.findAll();
 	}//get all secciones
+	
 	public Secciones getSecciones(long id) {
 		
-		Secciones secc=null;
-		for (Secciones secciones : lista) {
-			if( id == secciones.getId()) {
-				secc=secciones;
-				break;
-			}//if
-		}//foreach
-		return secc;
+		return seccionesRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("la sección con el Id ["
+						+ "] no existe")
+				);
 	}//get secciones
 	
 	public Secciones deleteSecciones(long id) {
 		Secciones secc=null;
-		for (Secciones secciones : lista) {
-			if( id == secciones.getId()) {
-				secc=secciones;
-				lista.remove(secciones);
-				break;
-			}//if
-		}//foreach
+		if (seccionesRepository.existsById(id)) {
+			secc  = seccionesRepository.findById(id).get();
+			seccionesRepository.deleteById(id);
+		}//ifexistbyid
 		return secc;
 	}//deletesecciones	
 	
+	public Secciones addSecciones(Secciones secciones) {
+		seccionesRepository.save(secciones);
+		return secciones;
+		
+//		//todo:validación de producto no repetido
+//		Optional<Secciones> tmpSecc = seccionesRepository.findByNombre(secciones.getNombre());
+//		if (tmpSecc.isEmpty()) {
+//			return seccionesRepository.save(secciones);
+//		}else {
+//			System.out.println("ya existe la sección con el nombre ["
+//				+ secciones.getNombre()	+ "]");
+//			return null;
+//		}//if//else
+	}//addseciones
+	
+	
 	public Secciones updateSecciones(long id, String nombre, String descripcion, Byte cantidadobras) {
-		Secciones secc=null;
-		for (Secciones secciones : lista) {
-			if( id == secciones.getId()) {
-				if(nombre != null) secciones.setNombre(nombre);
-				if(descripcion !=null)secciones.setDescripcion(descripcion);
-				if(cantidadobras !=null)secciones.setCantidadobras(cantidadobras);
-				secc = secciones;
-				break;
-			}//if
-		}//foreach
-		return secc;	
+			Secciones secc=null;
+			if (seccionesRepository.existsById(id)) {
+				secc = seccionesRepository.findById(id).get();
+					if(nombre != null)secc.setNombre(nombre);
+					if(descripcion !=null)secc.setDescripcion(descripcion);
+					if(cantidadobras !=null)secc.setCantidadobras(cantidadobras);
+					seccionesRepository.save(secc);
+				}//existById
+			return secc;
 	}//updatesecciones
 	
-	public Secciones addSecciones(Secciones secciones) {
-		lista.add(secciones);
-		return secciones;
-	}//add
-	
+
 	
 }//class SeccionesService 

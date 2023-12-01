@@ -1,25 +1,40 @@
 package org.lhdmi.ecommercelhdmi.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="secciones")
 public class Secciones {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique = true, nullable = false)
 	private  Long id;
+	@Column(nullable = false)
      private String nombre;
+	@Column(nullable = false)
      private String descripcion;
+	@Column(nullable = false)
      private Byte cantidadobras; 
      
-     private static long total=0;
+//     private static long total=0;
 
 	public Secciones(String nombre, String descripcion, Byte cantidadobras) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.cantidadobras = cantidadobras;
-		Secciones.total++;
-		this.id = total;
+//		Secciones.total++;
+//		this.id = total;
 	}//constructor 
 
 	public Secciones() {
-			Secciones.total++;
-			this.id=total;
-		}
+//			Secciones.total++;
+//			this.id=total;
+		}//constructor vacío
 	
 	public String getNombre() {
 		return nombre;
@@ -44,14 +59,6 @@ public class Secciones {
 	public void setCantidadobras(Byte cantidadobras) {
 		this.cantidadobras = cantidadobras;
 	}//setcantidadObras
-
-	public static long getTotal() {
-		return total;
-	}//gettotal
-
-	public static void setTotal(long total) {
-		Secciones.total = total;
-	}//settotal
 
 	public Long getId() {
 		return id;

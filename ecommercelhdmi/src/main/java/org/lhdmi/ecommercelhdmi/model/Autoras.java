@@ -1,14 +1,31 @@
 package org.lhdmi.ecommercelhdmi.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="autoras")
 	public class Autoras {
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column (name="id", unique = true, nullable = false)
 		private Long id;
+	@Column(nullable = false)
 		private String nombre;
+	@Column(nullable = false)
 		private String correo;
+	@Column(nullable = false)
 		private String descripcion;
+	@Column(nullable = false)
 		private String redSocial;
+	@Column(nullable = false)
 		private String telefono;
 		
-		private static long total = 0;
+//		private static long total = 0;
 
 
 		public Autoras(String nombre, String correo, String descripcion, String redSocial, String telefono) {
@@ -17,13 +34,13 @@ package org.lhdmi.ecommercelhdmi.model;
 			this.descripcion = descripcion;
 			this.redSocial = redSocial;
 			this.telefono = telefono;
-			Autoras.total++;
-			this.id=total;
+//			Autoras.total++;
+//			this.id=total;
 		}//constructor
 
 		public Autoras() {
-			Autoras.total++;
-			this.id=total;
+//			Autoras.total++;
+//			this.id=total;
 		}
 
 		public String getNombre() {
