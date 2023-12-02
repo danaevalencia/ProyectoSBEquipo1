@@ -1,13 +1,12 @@
-package org.lhdmi.ecommercelhdmi;
+package org.lhdmi.ecommerce.misb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcommercelhdmiApplication {
+public class MisbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcommercelhdmiApplication.class, args);
-	}//public
-
-}//class 
+		SpringApplication.run(MisbApplication.class, args);
+	}//main
+}//classMisbApplication

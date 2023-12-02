@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'org.lhdmi'
+group = 'org.lhdmi.ecommerce'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -21,7 +21,6 @@ dependencies {
   	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()
