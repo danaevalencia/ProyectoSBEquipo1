@@ -11,4 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VentasRepository extends JpaRepository<Ventas, Long> {
 	Optional<Ventas> findByFolio(String folio);
+<<<<<<< HEAD
 }//interface
+=======
+}
+>>>>>>> d6f6baa8cc40b565bcf12e565d40a256360e134e

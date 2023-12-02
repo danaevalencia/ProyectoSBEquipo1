@@ -36,11 +36,23 @@ public class Ventas {
 	this.status = status;
 	this.metodopago = metodopago;
 	this.folio = folio;
+<<<<<<< HEAD
 	}//Ventas
 
 	public Double getPreciototal() {
 		return preciototal;
 	}//getPreciototal
+=======
+	}
+
+	public Ventas() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Double getPreciototal() {
+		return preciototal;
+	}
+>>>>>>> d6f6baa8cc40b565bcf12e565d40a256360e134e
 
 	public void setPreciototal(Double preciototal) {
 		this.preciototal = preciototal;
@@ -100,4 +112,7 @@ public class Ventas {
 	
 
 }//class Ventas
+<<<<<<< HEAD
 
+=======
+>>>>>>> d6f6baa8cc40b565bcf12e565d40a256360e134e

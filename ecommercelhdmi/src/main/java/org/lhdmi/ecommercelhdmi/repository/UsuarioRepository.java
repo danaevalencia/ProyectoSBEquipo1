@@ -1,12 +1,14 @@
 package org.lhdmi.ecommercelhdmi.repository;
 
 
+import java.util.Optional;
+
 import org.lhdmi.ecommercelhdmi.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-//      Optional<Usuarios> findByNombre(String nombre);
+      Optional<Usuario> findByNombre(String nombre);
 
 }//intaerface

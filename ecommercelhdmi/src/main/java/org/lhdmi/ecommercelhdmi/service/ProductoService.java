@@ -1,6 +1,8 @@
 package org.lhdmi.ecommercelhdmi.service;
 import java.util.List;
+import java.util.Optional;
 
+import org.lhdmi.ecommercelhdmi.model.Autoras;
 import org.lhdmi.ecommercelhdmi.model.Producto;
 import org.lhdmi.ecommercelhdmi.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,14 @@ public class ProductoService {
 	}//deleteProducto
 
 	public Producto addProducto(Producto producto) {
-			//TODO: validacion
+		Optional<Producto> tmpAutora = productoRepository.findByTitulo(producto.getTitulo());
+		if (tmpAutora.isEmpty()) {
 			return productoRepository.save(producto);
+		}//if 
+		else {
+			System.out.println("Ya existe el producto con el nombre [ " + producto.getTitulo() + " ]");
+			return null;
+		}//else
 	}//addProducto
 	
 	public Producto updateProducto(long id, String titulo, String descripcion, String imagen, Double precio) {
