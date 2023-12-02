@@ -2,7 +2,7 @@
 package org.lhdmi.ecommercelhdmi.service;
 
 import java.util.List;
-//import java.util.Optional;
+import java.util.Optional;
 
 
 import org.lhdmi.ecommercelhdmi.model.Usuario;
@@ -40,16 +40,16 @@ public Usuario deleteUsuario(long id) {
 }//deleteUsuario
 
 public Usuario addUsuario(Usuario usuario) {
-////	Optional<Usuario> tmpUser = usuarioRepository.findByNombre(usuario.getNombre());
-//	if (tmpUser.isEmpty()){
-//		return usuarioRepository.save(usuario);
-//	} else {
-//		System.out.println("Ya existe el usuario con el nombre [" +
-//	usuario.getNombre() + "]");
-//		return null;
-//	}//else
-	usuarioRepository.save(usuario);
-	return usuario;
+	Optional<Usuario> tmpUser = usuarioRepository.findByNombre(usuario.getNombre());
+	if (tmpUser.isEmpty()){
+		return usuarioRepository.save(usuario);
+	} else {
+		System.out.println("Ya existe el usuario con el nombre [" +
+	usuario.getNombre() + "]");
+		return null;
+	}//else
+//	usuarioRepository.save(usuario);
+//	return usuario;
             }//addUsuario
 
 	public Usuario updateUsuario(long id, String nombre, String correo, String contrasena, String registrof, String tipo, String foto, String direccion) {

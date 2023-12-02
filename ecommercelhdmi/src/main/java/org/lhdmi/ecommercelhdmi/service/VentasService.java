@@ -36,16 +36,16 @@ public class VentasService {
 	}
 
 	public Ventas addVentas(Ventas ventas) {
-		ventasRepository.save(ventas);
-				return ventas;
+//		ventasRepository.save(ventas);
+//				return ventas;
 		
-//			Optional<Ventas>tmpVenta=ventasRepository.findByFolio(ventas.getFolio());
-//			if(tmpVenta.isEmpty()) {
-//				return ventasRepository.save(ventas);
-//			}else {
-//				System.out.println("Ya existe el producto con el Id ["+ventas.getFolio()+"]");
-//				return null;
-//			}
+			Optional<Ventas>tmpVenta=ventasRepository.findByFolio(ventas.getFolio());
+			if(tmpVenta.isEmpty()) {
+				return ventasRepository.save(ventas);
+			}else {
+				System.out.println("Ya existe el producto con el Id ["+ventas.getFolio()+"]");
+				return null;
+			}
 		}
 	
 	public Ventas updateVentas(long id, Double preciototal, String fechacompra, Double cantidad, String status, String metodopago, String folio) {

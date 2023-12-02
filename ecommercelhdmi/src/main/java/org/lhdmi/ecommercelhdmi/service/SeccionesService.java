@@ -1,7 +1,8 @@
 package org.lhdmi.ecommercelhdmi.service;
 
 import java.util.List;
-//import java.util.Optional;
+import java.util.Optional;
+
 import org.lhdmi.ecommercelhdmi.model.Secciones;
 import org.lhdmi.ecommercelhdmi.repository.SeccionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +38,18 @@ public class SeccionesService {
 	}//deletesecciones	
 	
 	public Secciones addSecciones(Secciones secciones) {
-		seccionesRepository.save(secciones);
-		return secciones;
-		
-//		//todo:validación de producto no repetido
-//		Optional<Secciones> tmpSecc = seccionesRepository.findByNombre(secciones.getNombre());
-//		if (tmpSecc.isEmpty()) {
-//			return seccionesRepository.save(secciones);
-//		}else {
-//			System.out.println("ya existe la sección con el nombre ["
-//				+ secciones.getNombre()	+ "]");
-//			return null;
-//		}//if//else
+//		seccionesRepository.save(secciones);
+//		return secciones;
+//		
+		//todo:validación de producto no repetido
+		Optional<Secciones> tmpSecc = seccionesRepository.findByNombre(secciones.getNombre());
+		if (tmpSecc.isEmpty()) {
+			return seccionesRepository.save(secciones);
+		}else {
+			System.out.println("ya existe la sección con el nombre ["
+				+ secciones.getNombre()	+ "]");
+			return null;
+		}//if//else
 	}//addseciones
 	
 	
