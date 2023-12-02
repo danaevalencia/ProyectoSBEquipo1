@@ -1,6 +1,6 @@
 package org.lhdmi.ecommercelhdmi.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.lhdmi.ecommercelhdmi.model.Ventas;
 import org.lhdmi.ecommercelhdmi.service.VentasService;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 		@GetMapping
-		public ArrayList<Ventas> getAllVentas(){
+		public List<Ventas> getAllVentas(){
 			return ventasService.getAllVentas();		
 		}//getAllProductos
 		
@@ -45,13 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 		public Ventas addVentas(@RequestBody Ventas ventas){
 			return ventasService.addVentas(ventas);		
 		}//postAllProductos
-		
-		private Long id;
-		private Double preciototal;
-		private String fechacompra;
-		private Double cantidad;
-		private String status;
-		private String metodopago;
+
 		
 		@PutMapping(path = "{ventaId}") 
 		//http://localhost:8080/api/usuarios/1?precio=55.80&imagen=bic40.jpg
@@ -61,9 +55,10 @@ import org.springframework.web.bind.annotation.RestController;
 				@RequestParam(required=false) String fechacompra,
 				@RequestParam(required=false) Double cantidad,
 				@RequestParam(required=false) String status,
-				@RequestParam(required=false) String metodopago
+				@RequestParam(required=false) String metodopago,
+				@RequestParam(required=false) String folio
 				){
-			return ventasService.updateVentas(id, preciototal, fechacompra, cantidad, status, metodopago);		
+			return ventasService.updateVentas(id, preciototal, fechacompra, cantidad, status, metodopago, folio);		
 		}//putVentas
 		
 

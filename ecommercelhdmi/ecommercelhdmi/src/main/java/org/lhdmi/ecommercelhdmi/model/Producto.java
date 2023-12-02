@@ -1,29 +1,43 @@
 package org.lhdmi.ecommercelhdmi.model;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//POJO Plain Old Java Object
+@Entity
+@Table(name="productos")
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique = true, nullable = false)
 	private Long id;
 	private String titulo;
 	private String descripcion;
 	private String imagen;
 	private Double precio;
 	
-	private static long total = 0;
+	//private static long total = 0;
 	
 	
 	//Constructor (sin id)
 	public Producto(String titulo, String descripcion, String imagen, Double precio) {
-		super();
+
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.precio = precio;
-		Producto.total++;
-		this.id=total;
+		//Producto.total++;
+		//this.id=total;
 	}//constructor
 
 	public Producto() {
-		Producto.total++;
-		this.id=total;
+		//Producto.total++;
+		//this.id=total;
 	}
 	
 	//Encapsular getter & setter *NO* incluir setId
@@ -80,4 +94,3 @@ public class Producto {
 	
 	
 }//class Producto
-

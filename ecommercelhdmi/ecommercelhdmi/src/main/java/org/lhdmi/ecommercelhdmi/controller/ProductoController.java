@@ -1,6 +1,6 @@
 package org.lhdmi.ecommercelhdmi.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.lhdmi.ecommercelhdmi.model.Producto;
 import org.lhdmi.ecommercelhdmi.service.ProductoService;
@@ -28,7 +28,7 @@ public class ProductoController {
 	}//constructor
 
 	@GetMapping
-		public ArrayList<Producto> getAllProductos(){
+		public List<Producto> getAllProductos(){
 			return productoService.getAllProductos();
 		}//getAllProductos
 	

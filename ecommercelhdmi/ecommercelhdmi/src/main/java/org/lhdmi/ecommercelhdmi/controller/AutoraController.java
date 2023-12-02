@@ -1,6 +1,6 @@
 package org.lhdmi.ecommercelhdmi.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.lhdmi.ecommercelhdmi.model.Autoras;
 import org.lhdmi.ecommercelhdmi.service.AutoraService;
@@ -27,7 +27,7 @@ public AutoraController(AutoraService autoraService) {
 }//constructor
 
 @GetMapping
-	public ArrayList<Autoras> getAllAutoras(){
+	public List<Autoras> getAllAutoras(){
 		return autoraService.getAllAutoras();
 	}//getAllAutoras
 
