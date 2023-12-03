@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Ventas {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@Column(name="idventas", unique=true, nullable=false)
 	private Long id;
 	@Column(nullable=false)
 	private Double preciototal;

@@ -44,7 +44,7 @@ public class AutoraService {
 					return autorasRepository.save(autoras);
 				}//if 
 				else {
-					System.out.println("Ya existe el producto con el nombre [ " + autoras.getNombre() + " ]");
+					System.out.println("Ya existe la autora con el nombre [ " + autoras.getNombre() + " ]");
 					return null;
 				}//else
 		
