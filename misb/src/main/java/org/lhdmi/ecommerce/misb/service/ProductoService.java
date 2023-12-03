@@ -43,7 +43,7 @@ public Producto addProducto(Producto producto) {
 		return productoRepository.save(producto);
 	}//if 
 	else {
-		System.out.println("Ya existe el producto con el nombre [ " + producto.getTitulo() + " ]");
+		System.out.println("Ya existe el producto con el título [ " + producto.getTitulo() + " ]");
 		return null;
 	}//else
 }//addProducto

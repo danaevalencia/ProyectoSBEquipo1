@@ -41,7 +41,7 @@ public class VentasService {
 			if(tmpVenta.isEmpty()) {
 				return ventasRepository.save(ventas);
 			}else {
-				System.out.println("Ya existe el producto con el Id ["+ventas.getFolio()+"]");
+				System.out.println("Ya existe el producto con el folio ["+ventas.getFolio()+"]");
 				return null;
 			}
 		}//addVentas
