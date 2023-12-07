@@ -20,6 +20,7 @@ public class MisbApplication {
 //		registrationBean.setFilter(new JwtFilter());
 //		//a donde vas a filtrar
 //		registrationBean.addUrlPatterns("/api/autoras/*");
+//
 //		registrationBean.addUrlPatterns("/api/galeria/*");
 //		registrationBean.addUrlPatterns("/api/secciones/*");
 //		registrationBean.addUrlPatterns("/api/usuarios/*");
