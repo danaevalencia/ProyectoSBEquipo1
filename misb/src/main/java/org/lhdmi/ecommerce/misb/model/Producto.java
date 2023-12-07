@@ -19,19 +19,48 @@ public class Producto {
 	private String descripcion;
 	private String imagen;
 	private Double precio;
+	private Integer seccion;
+	private String autora;
 	
 	//private static long total = 0;
 	
+	
 	//Constructor (sin id)
-		public Producto(String titulo, String descripcion, String imagen, Double precio) {
+//		public Producto(String titulo, String descripcion, String imagen, Double precio) {
+//
+//			this.titulo = titulo;
+//			this.descripcion = descripcion;
+//			this.imagen = imagen;
+//			this.precio = precio;
+//			//Producto.total++;
+//			//this.id=total;
+//		}//constructor
 
-			this.titulo = titulo;
-			this.descripcion = descripcion;
-			this.imagen = imagen;
-			this.precio = precio;
-			//Producto.total++;
-			//this.id=total;
-		}//constructor
+		public Producto(String titulo, String descripcion, String imagen, Double precio, Integer seccion, String autora) {
+		super();
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.imagen = imagen;
+		this.precio = precio;
+		this.seccion = seccion;
+		this.autora = autora;
+	}//constructor
+
+		public Integer getSeccion() {
+			return seccion;
+		}//getSeccion
+
+		public void setSeccion(Integer seccion) {
+			this.seccion = seccion;
+		}//setSeccion
+
+		public String getAutora() {
+			return autora;
+		}//getAutora
+
+		public void setAutora(String autora) {
+			this.autora = autora;
+		}//setAutora
 
 		public Producto() {
 			//Producto.total++;
@@ -82,11 +111,16 @@ public class Producto {
 			return id;
 		}//getId
 
-		//toString
 		@Override
 		public String toString() {
 			return "Producto [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen=" + imagen
-					+ ", precio=" + precio + "]";
+					+ ", precio=" + precio + ", seccion=" + seccion + ", autora=" + autora + "]";
 		}//toString
+
+//		@Override
+//		public String toString() {
+//			return "Producto [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", imagen=" + imagen
+//					+ ", precio=" + precio + "]";
+//		}//toString
 		
 }//class Producto

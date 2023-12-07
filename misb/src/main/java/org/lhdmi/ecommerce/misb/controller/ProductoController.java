@@ -5,6 +5,7 @@ import java.util.List;
 import org.lhdmi.ecommerce.misb.model.Producto;
 import org.lhdmi.ecommerce.misb.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //CRUD - CREATE - READ - UPDATE - DELETE
 	//HTTP - POST - GET - PUT - DELETE
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping(path="/api/galeria/") //http://localhost:8080/api/galeria/
 public class ProductoController {
@@ -54,9 +55,11 @@ public class ProductoController {
 			@RequestParam(required=false) String titulo,
 			@RequestParam(required=false) String descripcion,
 			@RequestParam(required=false) String imagen,
-			@RequestParam(required=false) Double precio
+			@RequestParam(required=false) Double precio,
+			@RequestParam(required=false) Integer seccion,
+			@RequestParam(required=false) String autora
 			){
-		return productoService.updateProducto(id, titulo, descripcion, imagen, precio);		
+		return productoService.updateProducto(id, titulo, descripcion, imagen, precio, seccion, autora);		
 	}//putProductos
 	
 }//class ProductoController

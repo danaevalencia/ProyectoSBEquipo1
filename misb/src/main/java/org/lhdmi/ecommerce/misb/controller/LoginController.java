@@ -17,6 +17,7 @@ import org.lhdmi.ecommerce.model.Usuario;
 import org.lhdmi.ecommerce.service.UsuarioService;
 */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping(path = "/api/login/")
 public class LoginController {
