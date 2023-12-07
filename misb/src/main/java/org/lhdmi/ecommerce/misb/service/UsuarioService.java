@@ -3,14 +3,19 @@ package org.lhdmi.ecommerce.misb.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.lhdmi.ecommerce.misb.model.ChangePassword;
 import org.lhdmi.ecommerce.misb.model.Usuario;
 import org.lhdmi.ecommerce.misb.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
 	private final UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired 
 	public UsuarioService(UsuarioRepository usuarioRepository){
@@ -37,31 +42,63 @@ public class UsuarioService {
 		}//deleteUsuario
 
 		public Usuario addUsuario(Usuario usuario) {
-			Optional<Usuario> tmpUser = usuarioRepository.findByNombre(usuario.getNombre());
-			if (tmpUser.isEmpty()){
-				return usuarioRepository.save(usuario);
-			} else {
-				System.out.println("Ya existe el usuario con el nombre [" +
-			usuario.getNombre() + "]");
-				return null;
-			}//else
-//			usuarioRepository.save(usuario);
-//			return usuario;
-		            }//addUsuario
-		public Usuario updateUsuario(long id, String nombre, String correo, String contrasena, String registrof, String tipo, String foto, String direccion) {
 			Usuario user = null;
-	if (usuarioRepository.existsById(id)){
-	user = usuarioRepository.findById(id).get(); 
+			if (usuarioRepository.findByCorreo(usuario.getCorreo()).isEmpty()){
+				//cifrar la contraseña
+				usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+				return usuarioRepository.save(usuario);
+			}//if 
+			else {
+				System.out.println("Ya existe el usuario con el email [ " + usuario.getCorreo() + " ]");
+			}//else
+			return user;
+			
+		}//addUsuario
+		
+		public Usuario updatePassword(Long id, ChangePassword changePassword) {
+			Usuario user = null;
+			if (usuarioRepository.existsById(id)) {
+				user = usuarioRepository.findById(id).get();
+				if(passwordEncoder.matches(changePassword.getPassword(),user.getContrasena())) {	
+//				if(user.getContrasena().equals(changePassword.getPassword())){
+					user.setContrasena(passwordEncoder.encode(changePassword.getNewPassword()));
+//					user.setContrasena(changePassword.getNewPassword());
+					usuarioRepository.save(user);
+				}//comparación
+				else {
+					System.out.println("updateUser- El password con el id [ " + id + " ] es incorrecto ");
+					user = null;
+				}
+			}//if
+			else {
+				System.out.println("updateUser- El usuario con el id [ " + id + " ] No se encuentra registrade");
+			}//else
+			return user;
+		}//upDatePassword
+
+		public boolean validateUser(Usuario usuario) {
+			Optional<Usuario> userByCorreo = usuarioRepository.findByCorreo(usuario.getCorreo());
+			if(userByCorreo.isPresent()) {
+				Usuario user = userByCorreo.get();
+				if (passwordEncoder.matches(usuario.getContrasena(), user.getContrasena())) {
+//				if (user.getContrasena().equals(usuario.getContrasena())) {
+					return true;
+				}//if password
+			}//if isPresent		
+			return false;
+		}//validateUser
+		
+		public Usuario updateUsuario(long id, String nombre, String foto, String direccion) {
+			Usuario user=null;
+			if (usuarioRepository.existsById(id)) {
+				user = usuarioRepository.findById(id).get();
+
 					if(nombre!=null) user.setNombre(nombre);
-					if(correo!=null) user.setCorreo(correo);
-					if(contrasena!=null) user.setContrasena(contrasena);
-					if(registrof!=null) user.setRegistrof(registrof);
-					if(tipo!=null) user.setTipo(tipo);
 					if(foto!=null) user.setFoto(foto);
 					if(direccion!=null) user.setDireccion(direccion);
-					usuarioRepository.save(user);
-				}//existById
-	        return user;
-		}//upDateUsuario
+					usuarioRepository.save(user);	
+			}//existById
+			return user;
+		}//updateUsuarios
 		
 }//classUsuarioService
