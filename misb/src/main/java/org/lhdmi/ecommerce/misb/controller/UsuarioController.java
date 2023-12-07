@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/usuarios/") //http://localhost:8080/api/usuarios/
 public class UsuarioController {
+	
 	private final UsuarioService usuarioService;
+	
 	@Autowired
 	public UsuarioController(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
@@ -44,19 +46,20 @@ public class UsuarioController {
 		return usuarioService.addUsuario(usuario);		
 	}//postAllProductos
 	
+//	@PutMapping (path="{userId}")//http://localhost:8080/api/usuarios/1?precio=55.80&imagen=bic40.jpg
+//	public Usuario updateUser (@PathVariable ("userId") Long id, @RequestBody ChangePassword changePassword) {
+//		return usuarioService.updateUser(id, changePassword);
+//	}//upDateUsuario
+	
 	@PutMapping(path = "{userId}") 
 	//http://localhost:8080/api/usuarios/1?precio=55.80&imagen=bic40.jpg
 	public Usuario updateUsuario(@PathVariable("userId") 
 			long id,
 			@RequestParam(required=false) String nombre,
-			@RequestParam(required=false) String correo,
-			@RequestParam(required=false) String contrasena,
-			@RequestParam(required=false) String registrof,
-			@RequestParam(required=false) String tipo,
 			@RequestParam(required=false) String foto,
 			@RequestParam(required=false) String direccion
 			){
-		return usuarioService.updateUsuario(id, nombre, correo, contrasena, registrof, tipo, foto, direccion);		
+		return usuarioService.updateUsuario(id, nombre, foto, direccion);		
 	}//putsuarios
 	
 }//classUsuarioController
