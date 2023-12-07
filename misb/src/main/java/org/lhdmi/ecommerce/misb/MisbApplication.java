@@ -13,18 +13,18 @@ public class MisbApplication {
 		SpringApplication.run(MisbApplication.class, args);
 	}//main
 	
-	@Bean
-	public FilterRegistrationBean<JwtFilter> jwtFilter(){
-		FilterRegistrationBean<JwtFilter> registrationBean = 
-							new FilterRegistrationBean<>();
-		registrationBean.setFilter(new JwtFilter());
-		//a donde vas a filtrar
-		registrationBean.addUrlPatterns("/api/autoras/*");
-		registrationBean.addUrlPatterns("/api/galeria/*");
-		registrationBean.addUrlPatterns("/api/secciones/*");
-		registrationBean.addUrlPatterns("/api/usuarios/*");
-		registrationBean.addUrlPatterns("/api/ventas/*");
-		return registrationBean;
-	}//jwtFilter
+//	@Bean
+//	public FilterRegistrationBean<JwtFilter> jwtFilter(){
+//		FilterRegistrationBean<JwtFilter> registrationBean = 
+//							new FilterRegistrationBean<>();
+//		registrationBean.setFilter(new JwtFilter());
+//		//a donde vas a filtrar
+//		registrationBean.addUrlPatterns("/api/autoras/*");
+//		registrationBean.addUrlPatterns("/api/galeria/*");
+//		registrationBean.addUrlPatterns("/api/secciones/*");
+//		registrationBean.addUrlPatterns("/api/usuarios/*");
+//		registrationBean.addUrlPatterns("/api/ventas/*");
+//		return registrationBean;
+//	}//jwtFilter
 	
 }//classMisbApplication

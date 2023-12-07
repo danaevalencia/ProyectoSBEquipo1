@@ -38,8 +38,8 @@ public class ProductoService {
 }//deleteProducto
 
 public Producto addProducto(Producto producto) {
-	Optional<Producto> tmpAutora = productoRepository.findByTitulo(producto.getTitulo());
-	if (tmpAutora.isEmpty()) {
+	Optional<Producto> tmpProducto = productoRepository.findByTitulo(producto.getTitulo());
+	if (tmpProducto.isEmpty()) {
 		return productoRepository.save(producto);
 	}//if 
 	else {
@@ -48,7 +48,7 @@ public Producto addProducto(Producto producto) {
 	}//else
 }//addProducto
 
-public Producto updateProducto(long id, String titulo, String descripcion, String imagen, Double precio) {
+public Producto updateProducto(long id, String titulo, String descripcion, String imagen, Double precio, Integer seccion, String autora) {
 	Producto prod=null;
 	if (productoRepository.existsById(id)) {
 		prod = productoRepository.findById(id).get();
@@ -56,6 +56,8 @@ public Producto updateProducto(long id, String titulo, String descripcion, Strin
 		if(descripcion!= null) prod.setDescripcion(descripcion);
 		if(imagen!= null) prod.setImagen(imagen);
 		if(precio!= null) prod.setPrecio(precio);
+		if(seccion!= null) prod.setSeccion(seccion);
+		if(autora!= null) prod.setAutora(autora);
 		productoRepository.save(prod);
 	}//existById
 	return prod;
